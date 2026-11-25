@@ -1,0 +1,70 @@
+name: GitHub Pages
+
+on:
+  push:
+    branches: ['**']
+  workflow_dispatch:
+
+permissions: {}
+
+concurrency:
+  group: pages-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  package:
+    if: github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: read
+    steps:
+      - name: Check out website
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Configure Pages
+        id: pages
+        uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6.0.0
+
+      - name: Collect public files
+        env:
+          PAGES_BASE_PATH: ${{ steps.pages.outputs.base_path }}
+        run: |
+          mkdir _site
+          cp index.html leistungen.html studio.html kontakt.html impressum.html datenschutz.html 404.html _site/
+          cp -R assets _site/
+          python3 - <<'PY'
+          import os
+          from html import escape
+          from pathlib import Path
+
+          page = Path('_site/404.html')
+          content = page.read_text(encoding='utf-8')
+          marker = '<base href="./">'
+          if marker not in content:
+              raise SystemExit('404.html must contain <base href="./">')
+
+          base_path = escape(os.environ['PAGES_BASE_PATH'].rstrip('/'), quote=True)
+          page.write_text(content.replace(marker, f'<base href="{base_path}/">', 1), encoding='utf-8')
+          PY
+
+      - name: Upload static site
+        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
+        with:
+          path: _site
+
+  deploy:
+    needs: package
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.publish.outputs.page_url }}
+    steps:
+      - name: Publish website
+        id: publish
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1
