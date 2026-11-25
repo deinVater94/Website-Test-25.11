@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <meta name="robots" content="noindex">
+  <meta name="description" content="Projektanfragen und Termine für ein Erstgespräch mit J&amp;K Media.">
+  <title>Kontakt · J&amp;K Media</title>
+  <link rel="icon" href="assets/images/mark.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/css/site.css">
+  <link rel="stylesheet" href="assets/css/contact.css">
+  <script src="assets/js/config.js" defer></script>
+  <script src="assets/js/site.js" defer></script>
+  <script src="assets/js/contact.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#inhalt">Zum Inhalt springen</a>
+  <header class="site-header" data-site-header></header>
+  <noscript><nav class="container fallback-nav" aria-label="Hauptnavigation"><a href="index.html">Startseite</a> <a href="leistungen.html">Leistungen</a> <a href="studio.html">Studio</a> <a href="kontakt.html" aria-current="page">Kontakt</a></nav></noscript>
+  <main id="inhalt">
+    <section class="section contact-section" aria-labelledby="contact-title">
+      <div class="container contact-grid">
+        <div class="contact-intro">
+          <h1 id="contact-title">Kontakt</h1>
+          <p class="lead">Sie können ein Projekt anfragen oder einen Termin für ein Erstgespräch vorschlagen.</p>
+          <address class="contact-channels" data-contact-channels hidden>
+            <a class="text-link" data-contact-email hidden>E-Mail schreiben</a>
+            <a class="text-link" data-contact-phone hidden>Anrufen</a>
+            <a class="text-link" data-contact-whatsapp hidden>WhatsApp öffnen</a>
+          </address>
+        </div>
+
+        <div class="surface contact-card" id="anfrage">
+          <noscript>
+            <p>Aktivieren Sie JavaScript, um eine Anfrage zu erstellen oder einen Termin vorzuschlagen.</p>
+          </noscript>
+
+          <div data-contact-interface hidden>
+            <div class="contact-modes" role="group" aria-label="Anliegen">
+              <button type="button" data-contact-mode="projekt" aria-controls="contact-form" aria-pressed="true">Projekt anfragen</button>
+              <button type="button" data-contact-mode="termin" aria-controls="contact-form" aria-pressed="false">Erstgespräch</button>
+            </div>
+
+            <p class="contact-mode-note" id="contact-mode-note"></p>
+            <div class="contact-booking" data-booking-link hidden>
+              <a class="button button-primary" data-booking-url target="_blank" rel="noopener noreferrer">Kalender öffnen <span aria-hidden="true">↗</span></a>
+              <small>Der Kalender des Buchungsanbieters öffnet sich in einem neuen Tab.</small>
+            </div>
+
+            <form id="contact-form" aria-describedby="contact-mode-note contact-delivery-note">
+              <fieldset class="contact-fields" disabled>
+                <legend class="contact-visually-hidden">Ihre Angaben</legend>
+                <label for="contact-name">Name <span aria-hidden="true">*</span>
+                  <input id="contact-name" name="name" autocomplete="name" maxlength="100" required>
+                </label>
+                <label for="contact-company">Organisation
+                  <input id="contact-company" name="company" autocomplete="organization" maxlength="120">
+                </label>
+                <label for="contact-email">E-Mail <span aria-hidden="true">*</span>
+                  <input id="contact-email" name="email" type="email" autocomplete="email" maxlength="254" required>
+                </label>
+                <label for="contact-phone">Telefon
+                  <input id="contact-phone" name="phone" type="tel" autocomplete="tel" maxlength="50">
+                </label>
+                <label class="contact-field-wide" for="contact-service" data-project-field>Leistung
+                  <select id="contact-service" name="service">
+                    <option value="">Bitte wählen</option>
+                    <option value="Film &amp; Video">Filmproduktion</option>
+                    <option>Fotografie</option>
+                    <option value="Live &amp; Event">Veranstaltungen</option>
+                    <option value="Social Media">Digitale Formate</option>
+                    <option>Postproduktion</option>
+                    <option>Sonstiges</option>
+                  </select>
+                </label>
+                <label for="contact-date" data-booking-field hidden>Wunschdatum <span aria-hidden="true">*</span>
+                  <input id="contact-date" name="preferredDate" type="date" required disabled>
+                </label>
+                <label for="contact-time" data-booking-field hidden>Zeitfenster (Berliner Zeit)
+                  <select id="contact-time" name="preferredTime" disabled>
+                    <option value="">Flexibel</option>
+                    <option>Vormittags (9–12 Uhr)</option>
+                    <option>Mittags (12–15 Uhr)</option>
+                    <option>Nachmittags (15–18 Uhr)</option>
+                  </select>
+                </label>
+                <label class="contact-field-wide" for="contact-message"><span data-message-label>Ihre Nachricht <span aria-hidden="true">*</span></span>
+                  <textarea id="contact-message" name="message" rows="4" maxlength="3000" required></textarea>
+                </label>
+              </fieldset>
+              <p class="contact-delivery-note" id="contact-delivery-note"></p>
+              <div class="contact-actions">
+                <button type="submit" class="button button-primary" disabled data-contact-submit></button>
+                <a class="text-link" href="datenschutz.html">Datenschutz</a>
+              </div>
+            </form>
+            <p class="contact-status" role="status" aria-live="polite" data-contact-status></p>
+
+            <div class="contact-draft" data-contact-draft hidden>
+              <label for="contact-draft-text">Entwurf</label>
+              <textarea id="contact-draft-text" rows="8" readonly></textarea>
+              <div class="contact-actions">
+                <button class="button button-secondary" type="button" data-copy-draft>Text kopieren</button>
+                <a class="text-link" data-draft-email hidden>E-Mail öffnen</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer" data-site-footer></footer>
+</body>
+</html>
